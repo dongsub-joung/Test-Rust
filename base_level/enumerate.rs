@@ -1,3 +1,15 @@
+// Eng Doc
+enum webEvent {
+    PageLad,
+    PageUnload,
+    KeyPress(char),
+    Paste(String),
+    click{ x: i64, y: i64 },
+}
+
+
+
+// KR Doc
 fn main(){
     enum IpAddrkind{
         V4(u8,u8,u8,u8),
