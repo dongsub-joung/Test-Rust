@@ -8,10 +8,9 @@ fn handle_connection(mut stream: TcpStream){
     let mut buffer: [i32; 1024]= [0; 1024];
 
     stream.read(&mut buffer).unwrap();
-    prinln!(
-        "Request: {}",
-        String::from_utf8_lossy(&buffer[..])
-    );
+    let response: &str= "HTTP/1.1 200 OK\r\n\r\n";
+    stream.write(response.as_bytes()).unwrap();
+    stream.flush().unwrap();
 }
 
 fn main(){
