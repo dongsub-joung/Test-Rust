@@ -17,15 +17,23 @@ fn hashing(elment: u32) -> &str {
     elment
 }
 
-fn handlingPN(users: &User) -> u32 {
+enum Psersonal{
+    first(u32),
+    second(&str),
+}
+
+fn handlingPN(users: &User) ->  {
     let private_number= &users.private_number;
     const FIRST= private_number[..6]
     const SECOND= private_number[7..]
 
+//     @todo sovling ownership problems
     // arraying "FIRST"
-    let array= addArray(&FIRST);
+    let Pserosnal::first= addArray(&FIRST);
     // Hasing "SECOND"
-    let hashing= hashing(&SECOND);
+    let Pserosnal::second= hashing(&SECOND);
+    
+//     map(&array, &hashing);
 }
 
 fn main(){
