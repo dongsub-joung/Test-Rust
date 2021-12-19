@@ -9,9 +9,13 @@ fn handle_connection(mut stream: TcpStream){
     stream.read(&mut buffer).unwrap();
 
     let get: &[u8; 16]= b"GET / HTTP/1.1\r\n";
-    
+    let sleep: &[u8; 21]= b"GET /sleep HTTP/1.1\r\n";
+
     let (status_line, finlename)= 
         if buffer.starts_with(get){
+            ("HTTP/1.1 200 OK", "index.html")
+        } else if buffer.starts_with(sleep){
+            thread::sleep(Duration::from_secs(5));
             ("HTTP/1.1 200 OK", "index.html")
         } else {
             ("HTTP/1.1 404 NOT FOUND", "404.html")
@@ -35,9 +39,13 @@ fn main(){
     let listener: TcpListener=
         TcpListener::bind("127.0.0.1:7875").unwrap();
 
+    let pool= ThreadPool::new(4);
+
     for stream: Result<TcpStream, Error> in listener.incoming(){
         let stream: TcpStream= stream.unwrap();
 
-        handle_connection(stream);
+        thread::spawn(||){
+            handle_connection(stream);
+        }
     }
 }
