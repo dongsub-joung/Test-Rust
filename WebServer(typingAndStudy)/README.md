@@ -7,3 +7,4 @@
 
 # Ref  
 - https://doc.rust-lang.org/std/net/index.html  
+- https://doc.rust-lang.org/rust-by-example/generics.html  

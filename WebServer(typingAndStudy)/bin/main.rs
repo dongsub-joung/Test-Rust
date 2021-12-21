@@ -4,6 +4,8 @@ use std::net::TcpListener;
 use std::net::TcpStream;
 use std::io::prelude::*;
 
+use server::ThreadPool;
+
 fn handle_connection(mut stream: TcpStream){
     let mut buffer: [i32; 1024]= [0; 1024];
     stream.read(&mut buffer).unwrap();
@@ -44,7 +46,9 @@ fn main(){
     for stream: Result<TcpStream, Error> in listener.incoming(){
         let stream: TcpStream= stream.unwrap();
 
-        thread::spawn(||){
+        thread::spawn();
+
+        thread::execute(||){
             handle_connection(stream);
         }
     }
