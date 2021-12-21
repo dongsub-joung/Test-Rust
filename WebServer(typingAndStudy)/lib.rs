@@ -1,12 +1,16 @@
 // https://www.youtube.com/watch?v=1AamFJGAE8E&t=519s
+// None adjuted Auto importing(syntax, type) system, manual tying
 
 pub struct ThreadPool;
 
-use std::thread;
+use std::{sync::mpsc, thread};
 
 pub struct ThreadPool {
-    threads: Vec<thread::JoinHandle<()>>,
+    threads: Vec<Worker>,
+    sender: mpsc::Sender<Job>,
 }
+
+type Job= Box<dyn FnOnce() + Send + 'static>;
 
 // Testing for execute()
 impl ThreadPool{
@@ -15,18 +19,26 @@ impl ThreadPool{
     pub fn new(size: usize) -> ThreadPool {
         assert!(size > 0);
 
-        let mut threads= Vec<{unknow}>} = Vec::with_capacity(size);
-        for _ in 0..size {
+        let (sender: Sender<Job>, receiver: receiver<Job>)= 
+            mpsc::channel();
+
+        let mut Workers= Vec<{unknow}>} = Vec::with_capacity(size);
+        for id in 0..size {
             // create threads
+            Workers.push(Workers::new(
+                id,
+                Arc::clone(&receiver)
+            ));
         }
-        ThreadPool { threads }
+        ThreadPool { Workers }
     }
 
     pub fn execute<F> (&self, f: F)
     where
         F: FnOnce() + Send + 'static
     {
-        
+        let job: Box<F>= Box::new(f);
+        self.sender.send(job).unwrap();
     }
 }
 
@@ -36,8 +48,18 @@ struct Worker {
 }
 
 impl Worker {
-    fn new(id: usize) -> Worker{
-        let thread: JoinHandle<()>= thread::spawn(|| {});
+    fn new(id: usize, receiver: Arc<Mutex<mpsc::receiver<Job>>>) -> Worker{
+        let thread: JoinHandle<()>= thread::spawn( move || loop {
+            // Recommand rewirte to auto type check system
+            let job: Box.. =receiver: Arc<Mutex<receiver..>>
+                .lock(): Result<MutexGuard<Receiver<...>>, >
+                .unwrap() :MutexGuard<Receiver<Box<dyn FnOnce() + Send>>>
+                .recv() : Result<Box<dyn FnOnce() + Send>, ..>
+                .unwrap();
+
+                println!("Worker {} go a job; executing.", id);
+                job();
+        });
 
         Worker{id, thread}
     }
