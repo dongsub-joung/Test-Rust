@@ -1,4 +1,5 @@
-// https://www.youtube.com/watch?v=1AamFJGAE8E&t=519s
+// https://www.youtube.com/watch?v=1AamFJGAE8E&t  
+// https://www.youtube.com/watch?v=qjx8vutWaUQ
 // None adjuted Auto importing(syntax, type) system, manual tying
 
 pub struct ThreadPool;
@@ -11,6 +12,11 @@ pub struct ThreadPool {
 }
 
 type Job= Box<dyn FnOnce() + Send + 'static>;
+
+enum Message {
+    NewJob(Job),
+    Terminate,
+}
 
 // Testing for execute()
 impl ThreadPool{
@@ -42,9 +48,22 @@ impl ThreadPool{
     }
 }
 
+imple Drop for ThreadPool{
+    fn drop(&mut sef){
+        for worker: &mut Worker in  &mut self.workers {
+            println!("Shutting down worker {}", worker.id);  
+        
+            if let Some(thread:: JoinHandle<()>)= worker.thread.take(){
+                thread.join().unwrap();
+            }
+            worker.thread.join().unwrap();
+        }
+    }
+}
+
 struct Worker {
     id: usize,
-    thread: thread::JoinHandle<()>
+    thread: Option<thread::JoinHandle<()>>
 }
 
 impl Worker {
@@ -61,6 +80,6 @@ impl Worker {
                 job();
         });
 
-        Worker{id, thread}
+        Worker{id, thread: some(thread)}
     }
 }
