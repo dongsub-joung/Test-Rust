@@ -15,7 +15,7 @@ fn main() {
     loop{
         println!("Pleasse inpute your guess.");
     
-        io::stdin(): Stdin
+        io::stdin(): Stdin 
             .read_line(&mut guess): Result<usize, Error>
             .expect("Failed to read line");
         
