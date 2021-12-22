@@ -8,7 +8,7 @@ use std::{sync::mpsc, thread};
 
 pub struct ThreadPool {
     threads: Vec<Worker>,
-    sender: mpsc::Sender<Job>,
+    sender: mpsc::Sender<Message>,
 }
 
 type Job= Box<dyn FnOnce() + Send + 'static>;
@@ -44,12 +44,20 @@ impl ThreadPool{
         F: FnOnce() + Send + 'static
     {
         let job: Box<F>= Box::new(f);
-        self.sender.send(job).unwrap();
+        self.sender.send(Message::NewJob(job)).unwrap();
     }
 }
 
 imple Drop for ThreadPool{
     fn drop(&mut sef){
+        println!("Sending terminate message to all workers.")
+
+        for _ in &self.workers {
+            self.sender.send(Message::Terminate).unwrap();
+        }
+
+        println!("Shutting down all worker.");  
+
         for worker: &mut Worker in  &mut self.workers {
             println!("Shutting down worker {}", worker.id);  
         
@@ -70,14 +78,22 @@ impl Worker {
     fn new(id: usize, receiver: Arc<Mutex<mpsc::receiver<Job>>>) -> Worker{
         let thread: JoinHandle<()>= thread::spawn( move || loop {
             // Recommand rewirte to auto type check system
-            let job: Box.. =receiver: Arc<Mutex<receiver..>>
+            let Message: Box.. =receiver: Arc<Mutex<receiver..>>
                 .lock(): Result<MutexGuard<Receiver<...>>, >
                 .unwrap() :MutexGuard<Receiver<Box<dyn FnOnce() + Send>>>
                 .recv() : Result<Box<dyn FnOnce() + Send>, ..>
                 .unwrap();
 
-                println!("Worker {} go a job; executing.", id);
-                job();
+            match message{
+                Message::NewJob(job: Box<dyn FnOnce() + Send>) => {
+                    println!("Worker {} go a job; executing.", id);
+                    job();
+                }
+                Message::Terminate => {
+                    println!("Worker {} go a job; terminate.", id);
+                    break;
+                }
+            }
         });
 
         Worker{id, thread: some(thread)}
