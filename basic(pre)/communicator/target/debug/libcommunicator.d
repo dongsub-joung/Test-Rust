@@ -1,0 +1,1 @@
+/Users/dongsub/gits/Rust_basic/basic/communicator/target/debug/libcommunicator.rlib: /Users/dongsub/gits/Rust_basic/basic/communicator/src/client.rs /Users/dongsub/gits/Rust_basic/basic/communicator/src/lib.rs /Users/dongsub/gits/Rust_basic/basic/communicator/src/network.rs
