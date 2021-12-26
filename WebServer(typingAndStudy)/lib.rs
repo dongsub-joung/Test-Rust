@@ -48,8 +48,8 @@ impl ThreadPool{
     }
 }
 
-imple Drop for ThreadPool{
-    fn drop(&mut sef){
+impl Drop for ThreadPool{
+    fn drop(&mut self){
         println!("Sending terminate message to all workers.")
 
         for _ in &self.workers {
