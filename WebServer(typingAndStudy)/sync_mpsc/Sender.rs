@@ -14,3 +14,19 @@ thread::spawn(move || {
 thread::spawn(move || {
     sender2.send(2).unwrap();
 })
+
+let msg = receiver.recv().unwrap();
+let msg2= receiver.recv().unwrap();
+
+assert_eq!(3, msg+msg2);
+
+// Implementations
+use std::sync::mpsc::channel;
+
+let (tx, rx)= channel;
+
+tx.send(1).unwrap();
+
+drop(rx);
+// This send will fail because the receiver is gone
+assert_eq(tx.send.unwrap_err().0, 1);
