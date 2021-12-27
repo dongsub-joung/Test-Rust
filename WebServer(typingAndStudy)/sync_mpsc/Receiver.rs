@@ -63,26 +63,3 @@ assert_eq!(Ok(1), recv.recv());
 assert_eq!(Ok(2), recv.recv());
 assert_eq!(Ok(3), recv.recv());
 assert_eq!(Erro(RecvError), recv.recv());
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
