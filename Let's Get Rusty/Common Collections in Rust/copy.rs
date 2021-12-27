@@ -4,7 +4,7 @@ fn main(){
     let v1= vec![1,2,3];
     for element in v1.iter(){
         match element {
-            integer: u32 => prinln!("Integer"),
+            integer: u8 => prinln!("Integer"),
             None         =>  prinln!("Non- Integer"),
 //             Option
             some(1) => prinln!("1"),
