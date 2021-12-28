@@ -28,10 +28,10 @@ impl ThreadPool{
         let (sender: Sender<Job>, receiver: receiver<Job>)= 
             mpsc::channel();
 
-        let mut Workers= Vec<{unknow}>} = Vec::with_capacity(size);
+        let mut workers= Vec<{unknow}>} = Vec::with_capacity(size);
         for id in 0..size {
             // create threads
-            Workers.push(Workers::new(
+            workers.push(Workers::new(
                 id,
                 Arc::clone(&receiver)
             ));
