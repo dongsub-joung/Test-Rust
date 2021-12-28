@@ -58,7 +58,7 @@ impl Drop for ThreadPool{
 
         println!("Shutting down all worker.");  
 
-        for worker: &mut Worker in  &mut self.workers {
+        for worker: &mut Worker in  &mut self.Worker {
             println!("Shutting down worker {}", worker.id);  
         
             if let Some(thread:: JoinHandle<()>)= worker.thread.take(){
@@ -78,7 +78,7 @@ impl Worker {
     fn new(id: usize, receiver: Arc<Mutex<mpsc::receiver<Job>>>) -> Worker{
         let thread: JoinHandle<()>= thread::spawn( move || loop {
             // Recommand rewirte to auto type check system
-            let Message: Box.. =receiver: Arc<Mutex<receiver..>>
+            let message: Box.. =receiver: Arc<Mutex<receiver..>>
                 .lock(): Result<MutexGuard<Receiver<...>>, >
                 .unwrap() :MutexGuard<Receiver<Box<dyn FnOnce() + Send>>>
                 .recv() : Result<Box<dyn FnOnce() + Send>, ..>
