@@ -25,12 +25,17 @@ fn main(){
 
 
 // do-test
-fn main() 
+fn main()
+    let chk: u8; 
     let fnc= |j| -> u8 { j-10 };
     for n in 0..{
-        let chk= match fnc(&n) == 0{
-            true => n,
+        chk= match fnc(&n) == 0{
+            true => {
+                n
+                break;
+            },
             false => continue,
         };
     }
+    println!("{}", chk;)
 }
