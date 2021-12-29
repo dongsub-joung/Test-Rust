@@ -1,3 +1,5 @@
+// https://doc.rust-lang.org/rust-by-example/mod/struct_visibility.html
+
 mod my{
     pub struct OpenBox<T>{
         pub contents: T,
@@ -16,4 +18,8 @@ mod my{
             }
         }
     }
+}
+
+fn main(){
+    let open_box= my::OpenBox{contents: "public info"};
 }
