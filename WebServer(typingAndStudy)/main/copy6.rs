@@ -1,5 +1,3 @@
-// https://www.youtube.com/watch?v=BHxmWTVFWxQ
-
 use std::net::TcpListener;
 use std::net::TcpStream;
 use std::io::prelude::*;
@@ -7,11 +5,11 @@ use std::io::prelude::*;
 use server::ThreadPool;
 
 fn handle_connection(mut stream: TcpStream){
-    let mut buffer: [i32; 1024]= [0; 1024];
+    let mut buffer= [0; 1024];
     stream.read(&mut buffer).unwrap();
 
-    let get: &[u8; 16]= b"GET / HTTP/1.1\r\n";
-    let sleep: &[u8; 21]= b"GET /sleep HTTP/1.1\r\n";
+    let get= b"GET / HTTP/1.1\r\n";
+    let sleep= b"GET /sleep HTTP/1.1\r\n";
 
     let (status_line, filename)= 
         if buffer.starts_with(get){
@@ -22,11 +20,9 @@ fn handle_connection(mut stream: TcpStream){
         } else {
             ("HTTP/1.1 404 NOT FOUND", "404.html")
         };
-
-    let contents: String= 
-        fs::read_to_string(filename).unwrap();
     
-    let response: String= format!(
+    let contents= fs::read_to_string(filename).unwrap();
+    let response= format!(
         "{}\r\nContent-Length: {}\r\n\r\n{}",
         status_line,
         contents.len(),
@@ -38,13 +34,12 @@ fn handle_connection(mut stream: TcpStream){
 }
 
 fn main(){
-    let listener: TcpListener=
-        TcpListener::bind("127.0.0.1:7875").unwrap();
+    let listener= TcpStream::bind("127.0.0.1:7875").unwrap();
 
     let pool= ThreadPool::new(4);
 
-    for stream: Result<TcpStream, Error> in listener.incoming().take(2){
-        let stream: TcpStream= stream.unwrap();
+    for stream in listener.incoming().take(2){
+        let stream= stream.unwrap();
 
         thread::spawn();
 
