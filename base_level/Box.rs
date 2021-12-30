@@ -15,7 +15,7 @@ struct Rectangle{
     bottom_right: Point,
 }
 
-fn origin() -> Point {
+fn origin() -> Poinst {
     Point{ x: 0.0 , y: 0.0 }
 }
 
