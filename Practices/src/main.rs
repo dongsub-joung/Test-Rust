@@ -1,6 +1,6 @@
-use crate PrintEx::StringT::*;
+use PrintEx::StringT::*;
 
 fn main() {
     let ex= String::from("Hello, world!");
-    new(ex);
+    PrintEx::StringT::new(ex);
 }
