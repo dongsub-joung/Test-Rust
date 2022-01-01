@@ -1,4 +1,5 @@
 // doc.rust-lang.org
+
 fn main(){
     let immutable_box= Box::new(5u32);
 

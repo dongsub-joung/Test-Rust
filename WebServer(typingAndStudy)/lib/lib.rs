@@ -36,7 +36,7 @@ impl ThreadPool{
                 Arc::clone(&receiver)
             ));
         }
-        ThreadPool { Workers }
+        ThreadPool { workers }
     }
 
     pub fn execute<F> (&self, f: F)
