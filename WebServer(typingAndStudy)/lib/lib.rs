@@ -53,7 +53,7 @@ impl Drop for ThreadPool{
         println!("Sending terminate message to all workers.");
 
         for _ in &self.workers {
-            self.sender.send(Message::Terminate).unwrap();
+            self.sender.send(Message::Terminate).unwrap();~
         }
 
         println!("Shutting down all worker.");  

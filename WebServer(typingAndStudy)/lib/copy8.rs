@@ -47,5 +47,44 @@ impl Drop for ThreadPool {
         for _ in &self.workers{
             self.sender.send(Message::Terminate).unwrap();
         }
+
+        println!("Shutting down all worker.");
+
+        for worker in &mut self.Worker {
+            println!("Shutting down worker {}", worker.id);
+            if let Some(thread::JoinHandle<()>)= worker.thread.take(){
+                thread.join().unwrap();
+            }
+            worker.thread.join().unwrap();
+        }
+    }
+}
+
+struct Worker {
+    id: usize,
+    thread: Option<thread::JoinHandle<()>>
+}
+
+impl Worker {
+    fn new(id: usize, receiver: Arc<Mutex<mpsc::receiver<Job>>>) -> Worker {
+        let thread= thread::spawn(move || loop{
+            let message= receiver
+                .lock().unwrap()
+                .recv().unwrap();
+        
+            match message {
+                Message::NewJob(job: Box<dyn FnOnce() + Send>) => {
+                    println!("Worker {} go a job; executing.", id);
+                    job();
+                }
+                Message::Terminate => {
+                    println!("Worker {} go a job; terminate.", id);
+                    break;
+                }         
+            }
+        });
+
+        
+        Worker { id, some(thread) }
     }
 }
