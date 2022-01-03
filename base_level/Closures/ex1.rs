@@ -1,6 +1,7 @@
 use std::thread;
 use std::time::Duration;
 
+// Before 
 fn simulated_expensive_calculation(intensity: u32) -> u32{
     println!("calculatiing slowly");
     thread::sleep(Duration::from_secs(2));
@@ -9,7 +10,7 @@ fn simulated_expensive_calculation(intensity: u32) -> u32{
 
 fn main() {
     fn generate_workout(intensity: u32, random_number: u32){
-        let expensive_closure= |num| {
+        let expensive_closure= |num: u32| -> u32 {
             print!("calculating slowly..");
             thread::sleep(Duration::from_secs(2));
             

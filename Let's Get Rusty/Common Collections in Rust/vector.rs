@@ -36,7 +36,7 @@ fn main(){
 // Ex 3
 fn main(){
     enum SpreadsheetCell{
-        int(i32),
+        Int(i32),
         Floadt(f64),
         Text(String),
     }
