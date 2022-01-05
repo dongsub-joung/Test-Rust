@@ -1,4 +1,4 @@
-use std::{io::{self, Read}, ops::Index};
+use std::{io::{self, Read}};
 
 fn get_numbers() -> (usize, usize){
     let mut buf= String::new();
@@ -13,15 +13,16 @@ fn get_numbers() -> (usize, usize){
     (n, k)
 }
 
-fn get_list() -> [u32; 1000] {
+fn get_list() -> Vec<u8> {
     let mut buf= String::new();
-    let mut list= [0; 1000];
-
+ 
     io::stdin().read_to_string(&mut buf).unwrap();
-    let mut list_strs= buf.split_whitespace();
-    for (index, element) in list_strs.enumerate(){
-        list[index]= element.trim().parse().unwrap();
-    }
+
+    let list= buf
+        .split_whitespace()
+        .map(|f| f.parse::<u8>())
+        .collect::<Result<Vec<u8>, _>>()
+        .unwrap();
 
     list
 }
@@ -30,9 +31,9 @@ fn main() {
     let (n ,k) = get_numbers();
     let mut result= 0;
 
-    let mut list= get_list();
+    let list= get_list();
 
-    let key: u32= list[k-1];
+    let key= list[k-1];
 
     for i in 0..n{
         if list[i] >= key && list[i] >0 {
