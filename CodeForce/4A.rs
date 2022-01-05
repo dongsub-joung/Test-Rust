@@ -1,16 +1,14 @@
 use std::io;
 
-fn return_number() -> i8{
+fn return_number() -> u8{
     let mut buff= String::new();
     
-    io::stdin().read_line(&mut buff).expect("ERR");
+    io::stdin().read_line(&mut buff).unwrap();
 
-    let num= buff.trim().parse().expect("ERR");
-
-    num
+    buff.trim().parse::<u8>().unwrap();
 }
 
-fn init(num: i8){
+fn init(num: u8){
     if(num <= 100){
         if num%2 == 0 {
             print!("YES");
@@ -23,6 +21,6 @@ fn init(num: i8){
 }
 
 fn main(){
-    let mut num= return_number();
+    let num= return_number();
     init(num);
 }
