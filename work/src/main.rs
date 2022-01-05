@@ -1,52 +1,25 @@
-use std::io::{self, Read};
+use std::io;
 
-fn get_number() -> i16{
-    let mut buf= String::new();
-    io::stdin().read_to_string(&mut buf).expect("msg");
-    let num= buf.trim().parse().expect("msg");
-    
-    num
-}
-
-fn get_win() -> i8 {
-    let A: i8;
-    let B: i8;
-    let C: i8;
-    
+fn get_numbers() -> Vec<f32> {
     let mut buf= String::new();
     io::stdin().read_line(&mut buf).unwrap();
-    
-    let mut list= buf.split_whitespace();
+    let strs= buf.split_whitespace();
 
-    let mut a= list.next().unwrap();
-    A= a.trim().parse().unwrap();
-    
-    let mut b= list.next().unwrap();
-    B= b.trim().parse().unwrap();
+    let list =strs
+        .map(|f| f.parse::<f32>())
+        .collect::<Result<Vec<f32>, _>>()
+        .unwrap();
 
-    let mut c= list. next().unwrap();
-    C= c.trim().parse().unwrap();
-
-    A+B+C
+    list
 }
 
 fn main() {
-    let mut num= get_number();
-    let mut result: i8;
-    let mut solved: i8= 0;
+    let list= get_numbers();
+    let n= list[0];
+    let k= list[1];
+    
+    let size: f32= (n*k) / 2.0;
+    let num: u8= size.to_string().parse().unwrap();
     
     println!("{}", num);
-    if num <= 1000{
-        loop{
-            result= get_win();
-            
-            if result >= 2 {
-                solved += 1;
-            }
-            num -= 1;
-            if num == 0 { break; }
-        }
-
-        println!("{}", solved)
-    }
 }

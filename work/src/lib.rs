@@ -1,33 +1,37 @@
-use std::io;
+// use std::io::{self, Read};
 
-#[cfg(test)]
-mod tests{
-    use super::*;
+// #[cfg(test)]
 
-    fn get_win() -> i8 {
-        let A: i8;
-        let B: i8;
-        let C: i8;
-        
-        let mut buf= String::new();
-        io::stdin().read_line(&mut buf).unwrap();
-        
-        let mut list= buf.split_whitespace();
-    
-        let mut a= list.next().unwrap();
-        A= a.trim().parse().unwrap();
-        
-        let mut b= list.next().unwrap();
-        B= b.trim().parse().unwrap();
-    
-        let mut c= list. next().unwrap();
-        C= c.trim().parse().unwrap();
-    
-        A+B+C
-    }
+// fn get_list() -> [u32; 1000] {
+//     let mut buf= String::new();
+//     let mut list= [0; 1000];
 
-    #[test]
-    fn one(){
-        assert_eq!(3, get_win());
-    }
-}    
+//     // *Infinit loop* 
+//     io::stdin().read_to_string(&mut buf).expect("msg");
+//     // this
+    
+//     let list_strs= buf.split_whitespace();
+//     for (index, element) in list_strs.enumerate(){
+//         list[index]= element.trim().parse().expect("msg");
+//     }
+
+//     list
+// }
+
+// mod tests{
+//     use super::*;
+
+//     #[test]
+//     fn one() {
+//         let mut list= [0; 1000];
+//         list[0]= 10;
+//         list[1]= 8;
+//         list[2]= 6;
+//         list[3]= 4;
+
+//         assert_eq!(
+//             list
+//             ,get_list()
+//         );
+//     }
+// }
