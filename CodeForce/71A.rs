@@ -3,16 +3,14 @@ use std::io::{self, Read};
 fn limit() -> u8{
     let mut buff= String::new();
     
-    io::stdin().read_line(&mut buff).expect("ERR");
+    io::stdin().read_line(&mut buff).unwrap();
 
-    let num= buff.trim().parse().expect("ERR");
-
-    num
+    buff.trim().parse().unwrap();
 }
 
 fn word() -> (usize, String) {
     let mut buf= String::new();
-    io::stdin().read_to_string(&mut buf).expect("msg");
+    io::stdin().read_to_string(&mut buf).unwrap();
     ( buf.len(), buf )
 }
 
