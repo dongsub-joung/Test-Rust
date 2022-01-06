@@ -2,13 +2,14 @@ use std::{io::{self, Read}};
 
 fn get_numbers() -> (usize, usize){
     let mut buf= String::new();
-    io::stdin().read_to_string(&mut buf).unwrap();
+    io::stdin().read_line(&mut buf).unwrap();
     let mut list= buf.split_whitespace();
 
     let num1= list.next().unwrap();
-    let n= num1.trim().parse().unwrap();
+    let n= num1.parse().unwrap();
+
     let num2= list.next().unwrap();
-    let k= num2.trim().parse().unwrap();
+    let k= num2.parse().unwrap();
     
     (n, k)
 }
@@ -16,7 +17,7 @@ fn get_numbers() -> (usize, usize){
 fn get_list() -> Vec<u8> {
     let mut buf= String::new();
  
-    io::stdin().read_to_string(&mut buf).unwrap();
+    io::stdin().read_line(&mut buf).unwrap();
 
     let list= buf
         .split_whitespace()
