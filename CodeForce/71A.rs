@@ -1,35 +1,42 @@
-use std::io::{self, Read};
+use std::io::{self, Read, BufRead};
 
-fn limit() -> u8{
+fn limit() -> usize{
     let mut buff= String::new();
     
-    io::stdin().read_line(&mut buff).unwrap();
+    let std= io::stdin();
+    let mut handle= std.lock();
 
-    buff.trim().parse().unwrap();
+    handle.read_line(&mut buff).unwrap()
 }
 
-fn word() -> (usize, String) {
+fn word() -> String {
     let mut buf= String::new();
-    io::stdin().read_to_string(&mut buf).unwrap();
-    ( buf.len(), buf )
+    io::stdin().read_line(&mut buf).unwrap();
+    buf
 }
 
 fn init(len: usize, word: String){
-    let list= word.as_bytes();
-    let a= list[0].to_string();
-    let b= list[list.len()].to_string();
-    
+    let list= word.as_str();
+    let size= list.len();
+    let a= &list[0..1];
+    let b= &list[size-2..size-1];
     println!("{}{}{}", a, len, b);
 }
 
 fn main(){
-    let mut num= limit();
+    let mut element= String::new();
+    
+    let num= limit();
     if num <= 100{
-        loop{
-            let (len, word)= word();
-            init(len, word);
-            num -= 1;
-            if num == 0 { break; }
+        for _ in 0..num{
+            element= word();
+            let size= element.len() -1 ;
+            
+            if  size > 4{
+                init(size, element);
+            } else {
+                println!("{}", &element);
+            }
         }
     } else {
         panic!("OUT RANGE")
