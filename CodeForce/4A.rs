@@ -5,7 +5,7 @@ fn return_number() -> u8{
     
     io::stdin().read_line(&mut buff).unwrap();
 
-    buff.trim().parse::<u8>().unwrap();
+    buff.trim().parse::<u8>().unwrap()
 }
 
 fn init(num: u8){
