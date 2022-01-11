@@ -1,25 +1,27 @@
-use std::io;
+#[derive(Debug)]
+struct Inches(i32);
 
-fn get_numbers() -> Vec<f32> {
-    let mut buf= String::new();
-    io::stdin().read_line(&mut buf).unwrap();
-    let strs= buf.split_whitespace();
+#[derive(PartialEq, PartialOrd)]
+struct Cemtimeters(f64);
 
-    let list =strs
-        .map(|f| f.parse::<f32>())
-        .collect::<Result<Vec<f32>, _>>()
-        .unwrap();
+impl Inches {
+    fn to_centimeters(&self) -> Cemtimeters{
+        let &Inches(inches) = self;
 
-    list
+        Cemtimeters(inches as f64 *2.54)  
+    }
 }
 
 fn main() {
-    let list= get_numbers();
-    let n= list[0];
-    let k= list[1];
     
-    let size: f32= (n*k) / 2.0;
-    let num: u8= size.to_string().parse().unwrap();
-    
-    println!("{}", num);
+    let foot= Inches(12);
+
+    let meter= Cemtimeters(100.0);
+
+    let tcmp=
+        if foot.to_centimeters() < meter {
+            "smaller"
+        } else {
+            "bigger"
+        };
 }
