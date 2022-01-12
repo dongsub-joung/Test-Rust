@@ -1,24 +1,42 @@
-// Dead, dont work code 
+use std::vec;
 
 // vec.push / pop
-fn chk(remain: i32, pre: i32) -> []{
-    let mut memo= [0i32];
+fn chk(remain: usize, pre: usize) -> i32{
     let mut cnt= 0;
+    const M: usize= 11;
 
-    if memo[remain,pre] != None {
-        return memo[remain,pre];
+    let mut width= pre.clone();
+    let mut height= remain.clone();
+
+    let mut memo= vec![vec![0i32; width+1]; height+1];
+
+    if memo[height][width] != 0{
+        // return memo[height][width];
+        return memo.pop().unwrap() as i32;
     }
     if remain < 0 {
-        return cnt;
+        return 0;
     }
     if remain == 0 {
         return 1;
     }
+    for i in pre..M{
+        cnt= cnt + chk(height-i, i);
+    }
 
-    return memo[remain, pre]= cnt;
+    memo[height][width]= cnt;
+    return memo[height][width];
 }
 
 fn main(){
-    const N: i32= 100;
-    chk(N, 2);
+    const N: usize= 101;
+    println!("{:?}", chk(N, 2));
 }
+
+// @todo 
+// let m= {};
+// m[[2,2]]= 0;
+// console.log(m);
+
+// var array = [[{path: 'path/image', preview: 'blob:imagepreview'}]]
+// console.log(array[0][0]
