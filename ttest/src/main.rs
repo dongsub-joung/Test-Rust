@@ -7,38 +7,50 @@ fn inputing() -> String {
 }
 
 fn main(){
+    const HIGHTEST: u8= 111;
     let word= inputing();
-    let word2= inputing();
+    let mut array= [HIGHTEST; 100];
+    let mut pluses=[HIGHTEST; 100];
 
-    let size= word.len();
-    let size2= word2.len();
-    
-    if size <= 100 && size2 <= 100{
-        let a= word.to_lowercase();
-        let b= word2.to_lowercase();
-        
-        let array1= a.as_bytes();
-        let array2= b.as_bytes();
-
-        let mut sum1= 0;
-        let mut sum2= 0;
-        
-        for i in array1{
-            sum1 += i;
-        }
-
-        for i in array2{
-            sum2 += i;
-        }
-
-        if sum1 == sum2 {
-            println!("{}", 0);
-        } else if sum1> sum2{
-            println!("{}", 1);
+    let mut a_idx= 0usize;
+    let mut p_idx=0usize;
+    for (index, char) in word.bytes().enumerate(){
+        if index%2 == 1 {
+            pluses[p_idx]= char;
+            p_idx += 1;
         } else {
-            println!("{}", -1);
+            array[a_idx]= char;
+            a_idx += 1;
         }
-    } else {
-        panic!("err")
     }
+
+    array.sort();
+
+    // i guess "map() methods" also can
+    let mut v= Vec::new();
+    const PLUSE: u8= 43;
+    for (i, j) in array.iter().enumerate(){
+        if i%2 == 0{
+            v.push(j);
+        } else {
+            v.push(&PLUSE);
+            v.push(j);
+        }
+        if j == &111u8 {
+            break;
+        }
+    }
+
+    // let mut result: &str= "";
+    for element in v.iter(){
+        if element == &&111u8{
+            continue;
+        } else {
+            // byte -> char
+            let char= element.to_string();
+            println!("{}", element);
+        }
+    }
+
+    // println!("{:?}", v);
 }
