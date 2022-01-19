@@ -79,7 +79,7 @@ impl Chain {
 
     pub fn generate_new_block(&mut self) -> bool {
         let header= Blockheader{
-            timestamp: time::now().to_timespec().sec,
+            timestamp: time::now().to_timespec().sec, 
         }
     }
 }
