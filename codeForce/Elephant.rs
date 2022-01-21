@@ -3,8 +3,8 @@ use std::io::{self, stdin};
 fn inputing() -> usize{
     let mut buff= String::new();
     stdin().read_line(&mut buff).unwrap();
-    let num= buff.parse::<usize>().unwrap();
-    num
+    
+    buff.parse::<usize>().unwrap()
 }
 
 fn main(){
@@ -13,10 +13,7 @@ fn main(){
     if x <= 5{
         cnt=1;
     } else{
-        for i in 5..0{
-            cnt= x/i;
-            x= x%i
-        }
+        cnt= (x / 5) + 1;
     }
     println!("{}", cnt);
 }
