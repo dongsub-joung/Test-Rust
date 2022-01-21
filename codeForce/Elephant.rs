@@ -8,7 +8,8 @@ fn inputing() -> usize{
 }
 
 fn main(){
-    let mut x= inputing();
+    // let mut x= inputing();
+    let mut x= 15usize;
     let mut cnt=0;
     if x <= 5{
         cnt=1;
