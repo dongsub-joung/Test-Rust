@@ -10,6 +10,21 @@ fn solution(mut list: Box<[i32]>) -> Box<[i32]>{
     let a= Box::new(*dedup);
 }
 
+fn solution2(list: Box<[usize]>) -> Vec<usize>{
+    let mut pre= 0usize;
+    let mut next= 0usize;
+    let mut result= Vec::new();
+    for (i, j) in list.iter().enumerate(){
+        pre= *j;
+        next= list[i+1];
+        if pre==next{
+            result.push(pre);
+        }
+    }
+
+    result
+}
+
 mod testing{
     use super::*;
 
