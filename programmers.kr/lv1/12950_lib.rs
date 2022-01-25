@@ -34,22 +34,4 @@ mod testing{
         assert_eq!(sol1, result_a);
         assert_eq!(sol2, result_b);
     }
-
-    #[test]
-    fn test2(){
-        let (arr1_a, arr1_b)= 
-            (Box::new([1usize]),
-            Box::new([2usize]));
-
-        let (arr2_a, arr2_b)= 
-            (Box::new([3usize]),
-            Box::new([4usize]));
-
-        let result_a: Vec<usize>= Vec::from([4]);
-        let result_b: Vec<usize>= Vec::from([6]); 
-        let (sol1, sol2)= 
-            solution(arr1_a, arr1_b, arr2_a, arr2_b);
-        assert_eq!(sol1, result_a);
-        assert_eq!(sol2, result_b);
-    }
 }
