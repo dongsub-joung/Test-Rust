@@ -7,6 +7,7 @@ use amethyst::{
         RenderingBundle,
     },
     utils::application_root_dir,
+    input::{InputBundle, StringBindings}
 };
 
 mod pikachuVolleyball;
@@ -19,8 +20,10 @@ fn main() -> amethyst::Result<()> {
     let config_dir= app_root.join("config");
     let assets_dir= app_root.join("assets");
     let config_display_path= config_dir.join("display.ron");
+    let config_binding_path= config_dir.join("bindings_config.ron");
     
     let game_data= GameDataBuilder::default()
+        .with_bundle(input_bundle)?
         .with_bundle(
             RenderingBundle::<DefaultBackend>::new()
                 .with_plugin(
