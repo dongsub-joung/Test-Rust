@@ -3,7 +3,7 @@ use std::{io::{self, stdin}};
 // f64, Rounding
 #[cfg(test)]
 fn solution(mut n: i128) -> i128{
-    let mut result= 0i128;
+    let mut result= 0_i128;
     let divid_five= n % 5;
     let divid_three= n % 3;
     let divid_sum=  n % 8 ;
@@ -11,9 +11,9 @@ fn solution(mut n: i128) -> i128{
     if divid_three != 0 && divid_five != 0 && divid_sum != 0{
         result= -1;
     } else {
-        result += n / 5;
+        result += (n / 5 as f64);
         n= divid_five;
-        result += n / 3;
+        result += (n / 3 as f64);
     }
     result
 }
