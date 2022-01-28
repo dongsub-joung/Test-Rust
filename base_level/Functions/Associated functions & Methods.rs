@@ -23,10 +23,10 @@ impl Rectangle {
     fn area(&self) -> f64{
         let Point{ x: x1, y: y2 }= self.p1;
         let Point{ x: x1, y: y2 }= self.p2;
+        
+        ((x1-x2)*(y1-y2)).abs()
     }
     
-    ((x1-x2)*(y1-y2)).abs()
-
     fn perimeter(&self) -> f64{
         let Point{ x: x1, y: y2 }= self.p1;
         let Point{ x: x1, y: y2 }= self.p2;
