@@ -1,48 +1,48 @@
-use std::{io::{self, stdin}};
+// use std::{io::{self, stdin}};
 
-// f64, Rounding
-#[cfg(test)]
-fn solution(a: usize, b: &str) -> u128{
-    if a > 100 {
-        panic!(" n size is more less 100.")
-    }
+// // f64, Rounding
+// #[cfg(test)]
+// fn solution(m: i32, n: i32) -> (i32, i32){
+//     let mut v2: Vec<i32>= Vec::new();
+//     let mut sum= 0;
+//     let mut min= 0;
 
-    let mut cnt= 0_u128; 
-    let mut v: Vec<usize>= Vec::new();
-    let list= b.split_whitespace();
-    
-    for i in list{
-        let value= i.parse::<usize>().unwrap();
-        if value > 1000{
-            panic!("element size is more less 1000")
-        }
-        v.push(value);
-    }
-    
-    if v.len() > a {
-        panic!("Out Range");
-    } else {
-        for i in v.iter(){
-            for j in (2..*i){
-                if i % j == 0 {
-                    continue;
-                } else {
-                    if j == i-1{
-                        cnt +=1;
-                    }
-                }
-            }
-        }
-    }
+//     for i in m..n+1{
+//         for j in 2..i+1{
+//             if j == i{
+//                 v2.push(i);
+//             }
+//             if i % j == 0 {
+//                 break;
+//             }
+//         }
+//     }
 
-    cnt
-}
+//     if v2.len() != 0 {
+//         sum= v2.iter().sum();
+//         min= v2.iter().min().unwrap().clone();
+//     } else {
+//         sum= -1;
+//         min= -1;
+//     }
 
-mod testing{
-    use super::*;
+//     (sum, min)
+// }
 
-    #[test]
-    fn test1(){
-        assert_eq!(solution(4, "1 3 5 7"), 3);
-    }
-}
+// mod testing{
+//     use super::*;
+
+//     #[test]
+//     fn test1(){
+//         let m= 60;
+//         let n= 100;
+//         assert_eq!(solution(m,n), (620, 61));
+//     }
+
+//     #[test]
+//     fn test2(){
+//         let m= 64;
+//         let n= 65;
+//         assert_eq!(solution(m,n), (-1, -1));
+//     }
+// }

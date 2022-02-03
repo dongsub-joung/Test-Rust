@@ -73,5 +73,38 @@ fn scan(tx: Sender<u16>, start_port: u16, addr: IpAddr, num_threads: u16){
 }
 
 fn main(){
-    let args: Vec<String>= en
-}is_arm_feature_detected!()
+    let args: Vec<String>= env::args().collect();
+    let program= args[0].clone();
+    let arguments= Arguments::new(&args).unwrap_or_else(
+        |err| {
+            if err.contains("help"){
+                process::exit(0);
+            } else {
+                eprintln!("{} problem parsing arguments: {}", program, err);
+                process::exit(0);
+            }
+        }
+    );
+
+    let num_threads= argumnets.threads;
+    let (tx, rx)= channel();
+    for i in 0..num_thread{
+        let tx= tx.clone();
+        thread::spawn(move || {
+            scan(tx, i, arguments.ipaddr, num_threads);
+        });
+    }
+
+    let mut out= Vec![];
+    drop(tx);
+    for p in rx{
+        out.push(p);
+    }
+
+    println!("");
+    out.sort();
+    for v in out {
+        prinlnt!("{} is open" , v);
+    }
+
+}
