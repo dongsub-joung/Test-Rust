@@ -1,71 +1,25 @@
-
 use std::io::{self, stdin};
 
-fn inputing() -> i64{
+fn main(){
+    let (x1, y1, z1)= inputing();
+    let (x2, y2, z2)= inputing();
+    let (x3, y3, z3)= inputing();
+
+}
+
+fn inputing() -> (u32, u32, u32){
+    let (mut x, mut y, mut z)= (0, 0, 0);
+    
     let mut buf= String::new();
     io::stdin().read_line(&mut buf).unwrap();
-    let n= buf.split_whitespace().next().unwrap();
+    let mut buf= buf.split_whitespace();
+    let a= buf.next().unwrap();
+    let b= buf.next().unwrap();
+    let c= buf.next().unwrap();
     
-    n.parse::<i64>().unwrap()
-}
+    x= a.parse().unwrap();
+    y= b.parse().unwrap();
+    z= c.parse().unwrap();
 
-fn primeNumber(){
-    let n= inputing();
-    if n < 2{
-        println!("Not Prime");
-    }
-
-    if n == 2{
-        println!("2 is prime");
-    }
-
-    let interger= (n as f64).sqrt() as i64;
-    for i in 2..interger{
-        if n % i == 0{
-            println!("Not Prime");
-        }
-    }
-
-    println!("{} is Prime Number", n);
-
-}
-
-fn eratos(){
-    let mut prime: Vec<bool>= Vec::new();
-    let number= inputing();
-
-    for i in prime{
-        println!("{}", i);
-    }
-}
-
-fn main(){
-    let mut v: Vec<i64>= Vec::new();
-    loop {
-        let num= inputing();
-        if  num == 0{
-            break;
-        }
-        v.push(num);
-    }
-
-    // 4948
-    let mut result: Vec<usize>= Vec::new();
-    for i in v{
-        let mut vv: Vec<usize>= Vec::new();
-        for n in i..2*i+1{
-            if n == 2*i {
-                vv.push(i.try_into().unwrap());
-            }
-            if i % n == 0{
-                break;
-            }
-        }
-        let sum: usize= vv.iter().sum();
-        result.push(sum);
-    }
-
-    for i in result{
-        println!("{}", i);
-    }
+    (x, y, z)
 }
