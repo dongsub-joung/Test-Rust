@@ -27,6 +27,7 @@ fn inputing() -> (i32, i32){
     
     let mut buf= String::new();
     io::stdin().read_line(&mut buf).unwrap();
+
     let mut buf= buf.split_whitespace();
     let a= buf.next().unwrap();
     let b= buf.next().unwrap();
