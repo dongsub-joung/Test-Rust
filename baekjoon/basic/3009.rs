@@ -1,11 +1,9 @@
 use std::io::{self, stdin};
 
 fn main(){
-    let (mut x1,mut y1)= inputing();
-    let (mut x2,mut y2)= inputing();
-    let (mut x3,mut y3)= inputing();
-    let (mut x4,mut y4)= inputing();
-
+    let (x1, y1)= inputing();
+    let (x2, y2)= inputing();
+    let (x3, y3)= inputing();
 
     if x1 == x2 {
         println!("{}", x3);
@@ -28,12 +26,12 @@ fn inputing() -> (i32, i32){
     let (mut x, mut y)= (0,0);
     
     let mut buf= String::new();
-    io::stdin().read_line(buf).unwrap();
+    io::stdin().read_line(&mut buf).unwrap();
     let a= buf.split_whitespace().next().unwrap();
     let b= buf.split_whitespace().next().unwrap();
     
     x= a.parse().unwrap();
-    x= b.parse().unwrap();
+    y= b.parse().unwrap();
 
     (x, y)
 }
