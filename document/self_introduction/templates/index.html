@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}        
+{% for post in posts %}
+<div>
+    <a href="{{ post.link }}">{{ post.title }}</a>
+    <small>{{ post.author }}</small>
+</div>
+{% endfor %}
+{% endblock %}
