@@ -1,25 +1,45 @@
 use std::io::{self, stdin};
 
 fn main(){
-    let (x1, y1, z1)= inputing();
-    let (x2, y2, z2)= inputing();
-    let (x3, y3, z3)= inputing();
-
+    let (n, m)= inputing_number();
+    
+    for _ in 0..n{
+        let str= inputing();
+        if (m % 2) == 0 {
+            if str[0] == 'B'{
+                let cnt= (m / 2)+1;
+                 
+            } else {
+                let cnt= (m / 2);
+            }
+        } else {
+            
+        }
+    }
 }
 
-fn inputing() -> (u32, u32, u32){
-    let (mut x, mut y, mut z)= (0, 0, 0);
+fn inputing_number() -> (u32, u32) {
+    let mut buf= String::new();
+    io::stdin().read_line(&mut buf).unwrap();
+    let mut list= buf.split_whitespace();
+    
+    let n: u32= list.next().unwrap().parse().unwrap();
+    let m: u32= list.next().unwrap().parse().unwrap();
+    
+    (n, m)
+}
+
+fn inputing() -> Vec<char>{
+    let mut v: Vec<char>= Vec::new();
     
     let mut buf= String::new();
     io::stdin().read_line(&mut buf).unwrap();
-    let mut buf= buf.split_whitespace();
-    let a= buf.next().unwrap();
-    let b= buf.next().unwrap();
-    let c= buf.next().unwrap();
-    
-    x= a.parse().unwrap();
-    y= b.parse().unwrap();
-    z= c.parse().unwrap();
+ 
+    let list=buf.chars();
+    for _ in 0..buf.len(){
+        let c= list.next().unwrap();
+        v.push(c);
+    }
 
-    (x, y, z)
+    v
 }
