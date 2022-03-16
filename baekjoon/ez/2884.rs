@@ -5,6 +5,9 @@ fn main(){
 
     let r= m - 45;
     if r < 0 {
+        if h == 0{
+            h = 24;
+        }
         h -= 1;
         m = 60 + r;
     }
