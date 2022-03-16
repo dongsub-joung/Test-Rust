@@ -2,17 +2,7 @@ use std::io::{self, stdin};
 
 fn main(){
     let (mut h,mut m)= inputing();
-
-    let r= m - 45;
-    if r < 0 {
-        if h == 0{
-            h = 24;
-        }
-        h -= 1;
-        m = 60 + r;
-    }
-
-    println!("{} {}", h, m)
+    let mut c= inputing2();
 }
 
 fn inputing()->(usize, i32){
@@ -23,4 +13,8 @@ fn inputing()->(usize, i32){
     let m: i32= list.next().unwrap().trim().parse().unwrap();
 
     (h, m)
+}
+
+fn inputing2() -> usize{
+    
 }
