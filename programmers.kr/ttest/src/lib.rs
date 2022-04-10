@@ -3,10 +3,9 @@ use std::{io::{self, stdin}};
 #[cfg(test)]
 fn solution(id_list: Vec<&str>, report: Vec<&str>, k: usize) -> Vec<usize>{
     let size= id_list.len();
-    let mut result= vec![0; size];
+    let mut result= Vec::new();
     let check: Vec<(usize, usize)>= Vec::new();
 
-    let size= 5_usize;
     let mut p= vec![0_usize; size];
     let mut point: Vec<Vec<usize>> = Vec::new();
     for _ in 0..size{
