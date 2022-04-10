@@ -3,12 +3,19 @@ use std::net::TcpListener;
 use std::net::TcpStream;
 use std::fs::File;
 
+extern crate web_server;
+use web_server::ThreadPool;
+
 fn main() {
     let listener= TcpListener::bind("127.0.0.1:7878").unwrap();
+    let pool= ThreadPool::new();
+    
     for stream in listener.incoming(){
         let stream= stream.unwrap();
 
-        handle_connnection(stream);
+        pool.execute(||{
+            handle_connnection(stream);
+        });
     }
 }
 
