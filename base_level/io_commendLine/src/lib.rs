@@ -2,13 +2,13 @@ use std::error::Error;
 use std::fs::File;
 use std::io::{prelude, Read};
 
-struct Config{
-    query: String,
-    filename: String,
+pub struct Config{
+    pub query: String,
+    pub filename: String,
 }
 
 impl Config{
-    fn new(args: &[String]) -> Result<Config, &'static str>{
+    pub fn new(args: &[String]) -> Result<Config, &'static str>{
         if args.len() < 3{
             return Err("not enough arguments");
         }
@@ -20,7 +20,7 @@ impl Config{
 }
 
 
-fn run(config: Config) -> Result<(), Box<dyn Error>>{
+pub fn run(config: Config) -> Result<(), Box<dyn Error>>{
     let mut f= File::open(config.filename)?;
 
     let mut contents= String::new();
