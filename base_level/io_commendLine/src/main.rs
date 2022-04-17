@@ -8,7 +8,7 @@ use io_commendLine::Config;
 fn main() {
     let args: Vec<String>= env::args().collect();
     let config= Config::new(&args).unwrap_or_else(|err|{
-        println!("Problem parshing arguments: {}", err);
+        eprintln!("Problem parshing arguments: {}", err);
         process::exit(1);
     });
 
@@ -16,7 +16,7 @@ fn main() {
     println!("In file {}", config.filename);
 
     if let Err(e)= io_commendLine::run(config){
-        println!("Application error: {}", e);
+        eprintln!("Application error: {}", e);
         process::exit(1);
     }
 }
